@@ -1,0 +1,18 @@
+{
+  "name": "node_email-transporter-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:fidehlg89/node_email-transporter-service.git",
+  "author": "Fidel Ernesto <fidehlg89@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.1"
+  }
+}
