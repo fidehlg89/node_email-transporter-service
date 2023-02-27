@@ -17,13 +17,14 @@ const transporter = nodemailer.createTransport({
 
 app.post("/send-email", async (req, res) => {
   try {
-    const { to, subject, body } = req.body;
+    const { email, subject, message } = req.body;
+    const to = process.env.EMAIL_USER;
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: email,
       to: to,
-      subject: subject,
-      html: body,
+      subject: `New Notification: ${subject}`,
+      html: `<p>Email: ${email}</p><p>Message: ${message}</p>`,
     };
 
     const result = await transporter.sendMail(mailOptions);
