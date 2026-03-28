@@ -1,0 +1,29 @@
+services:
+  # Backend Web Service
+  - type: web
+    name: email-transporter-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: EMAIL_USER
+        sync: false # Set in Render Dashboard
+      - key: EMAIL_PASSWORD
+        sync: false # Set in Render Dashboard
+      - key: PORT
+        value: 3005
+
+  # Frontend Static Site
+  - type: static
+    name: email-transporter-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: email-transporter-backend
+          property: host

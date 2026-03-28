@@ -59,7 +59,23 @@ npm run dev
 
 ---
 
+## 🚀 Deployment (Render)
+
+This project is ready to be deployed on **Render** using the included `render.yaml` Blueprint.
+
+### Steps:
+1.  **Connect Repo**: Open your Render Dashboard and click **New > Blueprint**.
+2.  **Select Repo**: Connect this GitHub repository.
+3.  **Configure**: Render will automatically detect the `render.yaml`.
+4.  **Environment Variables**:
+    - In the Render Dashboard, go to the **email-transporter-backend** service.
+    - Add `EMAIL_USER` and `EMAIL_PASSWORD` (App Password).
+5.  **Enjoy**: The frontend will automatically link to the backend URL.
+
+---
+
 ## 🛠️ Tech Stack
+
 
 - **Backend**: Node.js, Express, Nodemailer, Babel.
 - **Frontend**: React, Vite, CSS Vanilla (Premium Glassmorphism).
