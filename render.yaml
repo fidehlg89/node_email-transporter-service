@@ -2,22 +2,22 @@ services:
   # Backend Web Service
   - type: web
     name: email-transporter-backend
-    env: node
+    runtime: node
     rootDir: backend
     buildCommand: npm install
     startCommand: node src/index.js
     envVars:
       - key: EMAIL_USER
-        sync: false # Set in Render Dashboard
+        sync: false
       - key: EMAIL_PASSWORD
-        sync: false # Set in Render Dashboard
+        sync: false
       - key: PORT
         value: 3005
 
   # Frontend Static Site
   - type: static
     name: email-transporter-frontend
-    env: static
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     publishDir: dist
