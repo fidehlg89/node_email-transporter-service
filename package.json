@@ -1,22 +1,15 @@
 {
-  "name": "node_email-transporter-service",
+  "name": "node_email-transporter-service-monorepo",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:fidehlg89/node_email-transporter-service.git",
-  "author": "Fidel Ernesto <fidehlg89@gmail.com>",
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "start": "node src/index.js",
-    "build": "babel src -d dist"
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
   },
-  "dependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.0",
-    "@babel/preset-env": "^7.20.2",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "nodemailer": "^6.9.1"
-  }
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
 }

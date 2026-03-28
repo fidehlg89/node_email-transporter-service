@@ -1,0 +1,28 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { NodemailerEmailSender } from "./infrastructure/mailers/NodemailerEmailSender.js";
+import { SendEmail } from "./application/use-cases/SendEmail.js";
+import { EmailController } from "./interfaces/controllers/EmailController.js";
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+// Dependency Injection
+const emailSender = new NodemailerEmailSender(
+  process.env.EMAIL_USER,
+  process.env.EMAIL_PASSWORD
+);
+const sendEmailUseCase = new SendEmail(emailSender);
+const emailController = new EmailController(sendEmailUseCase);
+
+// Routes
+app.post("/send-email", (req, res) => emailController.handleSendEmail(req, res));
+
+const PORT = process.env.PORT || 80;
+app.listen(PORT, () => {
+  console.log(`Email Transporter Service listening at http://localhost:${PORT}`);
+});
