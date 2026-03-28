@@ -15,7 +15,7 @@ services:
         value: 3005
 
   # Frontend Static Site
-  - type: static
+  - type: web
     name: email-transporter-frontend
     runtime: static
     rootDir: frontend
