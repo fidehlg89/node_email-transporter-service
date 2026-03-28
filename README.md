@@ -72,6 +72,22 @@ This project is ready to be deployed on **Render** using the included `render.ya
     - Add `EMAIL_USER` and `EMAIL_PASSWORD` (App Password).
 5.  **Enjoy**: The frontend will automatically link to the backend URL.
 
+### OPCIÓN B: Despliegue Manual (sin Blueprint)
+
+Si prefieres configurar los servicios manualmente en Render:
+
+#### 1. Backend (Web Service)
+- **Root Directory**: `backend`
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm start`
+- **Environment Variables**: Añade `EMAIL_USER` y `EMAIL_PASSWORD`.
+
+#### 2. Frontend (Static Site)
+- **Root Directory**: `frontend`
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist`
+- **Environment Variables**: Añade `VITE_API_URL` con la URL de tu backend de Render.
+
 ---
 
 ## 🛠️ Tech Stack
