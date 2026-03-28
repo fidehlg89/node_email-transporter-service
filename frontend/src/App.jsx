@@ -24,6 +24,7 @@ function App() {
 
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'https://node-email-transporter-service.onrender.com';
+      console.log('Calling API at:', apiUrl);
       const response = await fetch(`${apiUrl}/send-email`, {
         method: 'POST',
         headers: {

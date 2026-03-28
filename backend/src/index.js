@@ -20,6 +20,11 @@ const sendEmailUseCase = new SendEmail(emailSender);
 const emailController = new EmailController(sendEmailUseCase);
 
 // Routes
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
+
 app.post("/send-email", (req, res) => emailController.handleSendEmail(req, res));
 
 const PORT = process.env.PORT || 80;
