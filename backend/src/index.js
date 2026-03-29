@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { NodemailerEmailSender } from "./infrastructure/mailers/NodemailerEmailSender.js";
+import { ResendEmailSender } from "./infrastructure/mailers/ResendEmailSender.js";
 import { SendEmail } from "./application/use-cases/SendEmail.js";
 import { EmailController } from "./interfaces/controllers/EmailController.js";
 
@@ -12,10 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 // Dependency Injection
-const emailSender = new NodemailerEmailSender(
-  process.env.EMAIL_USER,
-  process.env.EMAIL_PASSWORD
-);
+const emailSender = new ResendEmailSender(process.env.RESEND_API_KEY);
 const sendEmailUseCase = new SendEmail(emailSender);
 const emailController = new EmailController(sendEmailUseCase);
 

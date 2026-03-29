@@ -7,9 +7,7 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_PASSWORD
+      - key: RESEND_API_KEY
         sync: false
       - key: PORT
         value: 3005
