@@ -12,8 +12,11 @@ export class NodemailerEmailSender extends EmailSender {
         user: user,
         pass: pass,
       },
-      connectionTimeout: 10000, // 10 seconds
-      greetingTimeout: 10000,
+      tls: {
+        rejectUnauthorized: false, // Help with CA cert issues on some cloud platforms
+      },
+      connectionTimeout: 15000, // 15 seconds
+      greetingTimeout: 15000,
       socketTimeout: 30000, // 30 seconds
     });
   }
