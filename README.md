@@ -7,7 +7,10 @@ This project is a professional-grade email transporter service that integrates a
 - **Clean Architecture Backend**: Decoupled layers (Domain, Application, Infrastructure) for high maintainability.
 - **Microservice Ready**: Exposes a robust REST API for sending emails.
 - **Premium UI**: Modern frontend built with React, Vite, and glassmorphic designs.
-- **Security**: Environment variable management and Gmail App Password support.
+- **Resend SDK Integration**: Industry-standard email delivery using the official Resend API.
+- **Microservice Ready**: Exposes a robust REST API for sending emails.
+- **Premium UI**: Modern frontend built with React, Vite, and glassmorphic designs.
+- **Security**: Environment variable management and API Key support.
 - **Developer Experience**: Watch mode for both backend and frontend development.
 
 ---
@@ -20,7 +23,7 @@ This project is a professional-grade email transporter service that integrates a
 │   ├── src/
 │   │   ├── domain/     # Logic and Interfaces
 │   │   ├── application/# Use Cases
-│   │   ├── infrastructure/ # External integrations (Nodemailer, Express)
+│   │   ├── infrastructure/ # External integrations (Resend, Express)
 │   │   └── interfaces/ # Controllers
 ├── frontend/           # React + Vite application
 └── package.json        # Monorepo management
@@ -32,17 +35,16 @@ This project is a professional-grade email transporter service that integrates a
 
 ### 1. Prerequisites
 - **Node.js** (v18 or higher)
-- **Gmail Account** (with 2FA enabled)
+- **Resend Account**: Sign up at [resend.com](https://resend.com).
 
 ### 2. Configuration
-Create/Update `backend/.env` with your Gmail credentials:
+Create/Update `backend/.env` with your Resend API Key:
 ```env
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASSWORD=your_16_character_app_password
+RESEND_API_KEY=re_your_api_key_here
 PORT=3005
 ```
 > [!IMPORTANT]
-> To get the `EMAIL_PASSWORD`, you must generate a **Google App Password**. Go to Security > 2-Step Verification > App Passwords.
+> To get the `RESEND_API_KEY`, log in to Resend and go to **API Keys**.
 
 ### 3. Installation
 From the root directory, run:
@@ -69,31 +71,15 @@ This project is ready to be deployed on **Render** using the included `render.ya
 3.  **Configure**: Render will automatically detect the `render.yaml`.
 4.  **Environment Variables**:
     - In the Render Dashboard, go to the **email-transporter-backend** service.
-    - Add `EMAIL_USER` and `EMAIL_PASSWORD` (App Password).
+    - Add `RESEND_API_KEY`.
 5.  **Enjoy**: The frontend will automatically link to the backend URL.
-
-### OPCIÓN B: Despliegue Manual (sin Blueprint)
-
-Si prefieres configurar los servicios manualmente en Render:
-
-#### 1. Backend (Web Service)
-- **Root Directory**: `backend`
-- **Build Command**: `npm install && npm run build`
-- **Start Command**: `npm start`
-- **Environment Variables**: Añade `EMAIL_USER` y `EMAIL_PASSWORD`.
-
-#### 2. Frontend (Static Site)
-- **Root Directory**: `frontend`
-- **Build Command**: `npm install && npm run build`
-- **Publish Directory**: `dist`
-- **Environment Variables**: Añade `VITE_API_URL` con la URL de tu backend de Render.
 
 ---
 
 ## 🛠️ Tech Stack
 
 
-- **Backend**: Node.js, Express, Nodemailer, Babel.
+- **Backend**: Node.js, Express, Resend SDK, Babel.
 - **Frontend**: React, Vite, CSS Vanilla (Premium Glassmorphism).
 - **Architecture**: Clean Architecture principles.
 
