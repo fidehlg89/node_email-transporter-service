@@ -5,24 +5,43 @@ export class NodemailerEmailSender extends EmailSender {
   constructor(user, pass) {
     super();
     this.transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // Use SSL/TLS
       auth: {
         user: user,
         pass: pass,
       },
+      connectionTimeout: 10000, // 10 seconds
+      greetingTimeout: 10000,
+      socketTimeout: 30000, // 30 seconds
     });
   }
 
   async send(email) {
-    const mailOptions = {
-      from: email.from,
-      to: process.env.EMAIL_USER, // Recipient is the admin
-      subject: `New Notification: ${email.subject}`,
-      html: `<p>Email: ${email.from}</p><p>Message: ${email.message}</p>`,
-    };
+    try {
+      console.log(`Attempting to send email from ${email.from}...`);
+      
+      // Verify connection configuration
+      await this.transporter.verify();
+      console.log("SMTP connection verified successfully");
 
-    const result = await this.transporter.sendMail(mailOptions);
-    console.log(`Email sent from ${email.from}: ${result.response}`);
-    return result;
+      const mailOptions = {
+        from: email.from,
+        to: process.env.EMAIL_USER, // Recipient is the admin
+        subject: `New Notification: ${email.subject}`,
+        html: `<p>Email: ${email.from}</p><p>Message: ${email.message}</p>`,
+      };
+
+      const result = await this.transporter.sendMail(mailOptions);
+      console.log(`Email sent from ${email.from}: ${result.response}`);
+      return result;
+    } catch (error) {
+      console.error(`Nodemailer Error: ${error.message}`);
+      if (error.code === 'ETIMEDOUT') {
+        console.error("Connection timed out. Check your firewall or Render port permissions.");
+      }
+      throw error;
+    }
   }
 }
