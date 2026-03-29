@@ -4,8 +4,8 @@ services:
     name: email-transporter-backend
     runtime: node
     rootDir: backend
-    buildCommand: npm install
-    startCommand: node src/index.js
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
       - key: EMAIL_USER
         sync: false
