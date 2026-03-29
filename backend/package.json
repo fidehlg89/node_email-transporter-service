@@ -7,9 +7,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node src/index.js",
     "dev": "node --watch src/index.js",
-    "build": "babel src -d dist"
+    "build": "echo \"No build step required for Node ES Modules\""
   },
   "dependencies": {
     "@babel/cli": "^7.21.0",
